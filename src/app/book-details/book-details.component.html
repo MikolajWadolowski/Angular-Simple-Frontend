@@ -1,0 +1,42 @@
+<div book-details-form style="text-align: center;">
+
+  <!-- <label>{{book.title}}</label> -->
+
+<br>
+  <mat-form-field appearance="fill" style="width: 30%">
+    <mat-label>Title</mat-label>
+    <input matInput value="{{book.title | titlecase}}" name="title" disabled="true">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill" style="width: 30%">
+    <mat-label>Author</mat-label>
+    <input matInput value="{{book.author | titlecase}}" name="author" disabled="true">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill" style="width: 30%">
+    <mat-label>ISBN</mat-label>
+    <input matInput value="{{book.isbn}}" name="isbn" disabled="true">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill" style="width: 30%">
+    <mat-label>Page Number</mat-label>
+    <input matInput value="{{book.pageNumber}}" name="pageNumber" disabled="true">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill" style="width: 30%">
+    <mat-label>Date of Release</mat-label>
+    <input matInput value="{{book.dateOfRelease | date}}" name="dateOfRelease" disabled="true">
+  </mat-form-field>
+  <br>
+  <mat-form-field appearance="fill" style="width: 30%">
+    <mat-label>Genres</mat-label>
+    <mat-chip-list aria-label="Genres">
+    <mat-chip *ngFor="let book of book.genres">{{book}}</mat-chip>
+  </mat-chip-list>
+</mat-form-field>
+  <!-- <mat-chip-list class="no-wrap" >
+    <mat-chip class="no-wrap" *ngFor="let genre of book.genres.split(',')">{{genre}}</mat-chip>
+</mat-chip-list> -->
+<br>
+<button mat-raised-button color="accent"(click) = "openDialog()">Rent Book</button>
+</div>

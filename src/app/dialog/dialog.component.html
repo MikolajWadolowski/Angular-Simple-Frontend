@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Book Form</h1>
+<div mat-dialog-content>
+ <form [formGroup] = "bookForm">
+    <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
+        <input formControlName="title" matInput placeholder="Title">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Author</mat-label>
+        <input formControlName="author" matInput placeholder="Author">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>ISBN</mat-label>
+        <input matInput formControlName="isbn" type="number" placeholder="ISBN">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Page Number</mat-label>
+        <input matInput formControlName="pageNumber" type="number" placeholder="Page Number">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Choose a date</mat-label>
+        <input matInput formControlName="dateOfRelease" [matDatepicker]="picker">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Genres</mat-label>
+        <mat-select formControlName="genres" multiple>
+          <mat-option *ngFor="let genre of genresList" [value]="genre">{{genre}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+ </form>
+
+ <div mat-dialog-action [align]="'end'"> 
+  <button mat-raised-button color="warn" mat-dialog-close="">Close</button>
+  <button style="margin-left: 8px;" mat-raised-button color="primary" (click)="addBook()">{{actionBtn}}</button>
+  </div>
+
+</div>
