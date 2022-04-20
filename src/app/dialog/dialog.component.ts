@@ -33,7 +33,7 @@ export class DialogComponent implements OnInit {
         isbn : ['',Validators.required],
         pageNumber : ['',Validators.required],
         dateOfRelease : ['',Validators.required],
-        genres : this.formBuilder.array([])
+        genres : ['',Validators.required]
     });
     if(this.editData){
       this.actionBtn = "Update";
@@ -45,6 +45,13 @@ export class DialogComponent implements OnInit {
       this.bookForm.controls['genres'].setValue(this.editData.genres);
     }
   }
+
+
+  getGenres(){
+    return this.bookForm.controls["genres"] as FormArray;
+  }
+
+
 
   addBook(){
     if(!this.editData){
@@ -69,6 +76,7 @@ export class DialogComponent implements OnInit {
   }
   } 
   updateBook(){
+   console.log(this.bookForm.value.genres)
     this.api.updateBook(this.bookForm.value,this.editData.id)
     .subscribe({
       next:(res)=>{

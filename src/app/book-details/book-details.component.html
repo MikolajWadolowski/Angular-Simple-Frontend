@@ -31,7 +31,7 @@
   <mat-form-field appearance="fill" style="width: 30%">
     <mat-label>Genres</mat-label>
     <mat-chip-list aria-label="Genres">
-    <mat-chip *ngFor="let genre of book.genres">{{genre}}</mat-chip>
+    <mat-chip color="primary" selected *ngFor="let genre of book.genres">{{genre}}</mat-chip>
   </mat-chip-list>
 </mat-form-field>
 <br>
@@ -50,7 +50,10 @@
     <input matInput value="No user, Book is free to Rent" name="pageNumber" disabled="true">
   </mat-form-field>
   <br>
-  <button mat-raised-button color="accent"(click) = "openDialog(bookId)">Rent Book</button></ng-template>
+  <button mat-raised-button color="accent"(click) = "openDialog(bookId)">Rent Book</button>
+<br>
+</ng-template>
+
   <br>
   <button mat-raised-button color="none" routerLink="">Back to Home</button>
 
