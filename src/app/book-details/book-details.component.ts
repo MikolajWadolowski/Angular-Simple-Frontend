@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { FormGroup,FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
@@ -13,24 +13,40 @@ import { BookRentComponent } from '../book-rent/book-rent.component';
 })
 export class BookDetailsComponent implements OnInit {
 
+  bookId!: number;
   book: any;
   rentForm !: FormGroup;
-
   constructor(private api: ApiService,private route: ActivatedRoute,private dialog: MatDialog) { }
 
   ngOnInit(): void {
-   const id = this.route.snapshot.paramMap.get('id');
-   this.bookDetails(Number(id));
+   const id = Number(this.route.snapshot.paramMap.get('id'));
+   this.bookId = id;
+   this.bookDetails(id);
   }
 
 
-  openDialog() {
-    this.dialog.open(BookRentComponent, {
-        width: '30%'
-    }).afterClosed().subscribe(val=>{
-      if(val === "save"){
 
+  returnBook(bookId: number){
+    this.api.returnBook(bookId).subscribe({
+      next:(res)=>{
+        alert("Book returned successfully")
+        this.bookDetails(bookId);
+      },
+      error:()=>{
+        alert("Failed at returing the book")
       }
+    })
+
+  }
+
+
+  openDialog(bookId: number) {
+    console.log(bookId);
+    this.dialog.open(BookRentComponent, {
+        width: '30%',
+        data: bookId
+    }).afterClosed().subscribe(val=>{
+      this.bookDetails(bookId);
     })
   }
 

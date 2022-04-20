@@ -33,7 +33,7 @@ export class DialogComponent implements OnInit {
         isbn : ['',Validators.required],
         pageNumber : ['',Validators.required],
         dateOfRelease : ['',Validators.required],
-        genres : this.formBuilder.array([''])
+        genres : this.formBuilder.array([])
     });
     if(this.editData){
       this.actionBtn = "Update";
@@ -47,9 +47,8 @@ export class DialogComponent implements OnInit {
   }
 
   addBook(){
-    console.log(this.bookForm.value);
     if(!this.editData){
-      console.log(this.bookForm);
+
     if(this.bookForm.valid){
       this.api.postBook(this.bookForm.value)
       .subscribe({

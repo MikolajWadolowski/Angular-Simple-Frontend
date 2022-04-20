@@ -31,12 +31,35 @@
   <mat-form-field appearance="fill" style="width: 30%">
     <mat-label>Genres</mat-label>
     <mat-chip-list aria-label="Genres">
-    <mat-chip *ngFor="let book of book.genres">{{book}}</mat-chip>
+    <mat-chip *ngFor="let genre of book.genres">{{genre}}</mat-chip>
   </mat-chip-list>
 </mat-form-field>
+<br>
+<div *ngIf="book.user != null && book.user != undefined; else elseBlock">
+  
+  <mat-form-field appearance="fill" style="width: 30%">
+    <mat-label>Rented by User</mat-label>
+    <input matInput value="{{book.user.username}}" name="pageNumber" disabled="true">
+  </mat-form-field>
+  <br>
+  <button mat-raised-button color="primary"(click) = "returnBook(bookId)">Return Book</button>
+</div>
+<ng-template #elseBlock>
+  <mat-form-field appearance="fill" style="width: 30%">
+    <mat-label>Rented by User</mat-label>
+    <input matInput value="No user, Book is free to Rent" name="pageNumber" disabled="true">
+  </mat-form-field>
+  <br>
+  <button mat-raised-button color="accent"(click) = "openDialog(bookId)">Rent Book</button></ng-template>
+  <br>
+  <button mat-raised-button color="none" routerLink="">Back to Home</button>
+
   <!-- <mat-chip-list class="no-wrap" >
     <mat-chip class="no-wrap" *ngFor="let genre of book.genres.split(',')">{{genre}}</mat-chip>
 </mat-chip-list> -->
-<br>
-<button mat-raised-button color="accent"(click) = "openDialog()">Rent Book</button>
+<!-- <br>
+<div *ngIf="book.user != null && book.user != undefined; else elseBlock"><button mat-raised-button color="accent"(click) = "openDialog(bookId)">Rent Book</button></div>
+<ng-template #elseBlock><button mat-raised-button color="primary"(click) = "openDialog(bookId)">Return Book</button></ng-template> -->
 </div>
+
+  

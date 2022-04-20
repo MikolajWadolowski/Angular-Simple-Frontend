@@ -1,5 +1,5 @@
 import { TitleCasePipe } from '@angular/common';
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { FormGroup,FormBuilder,Validators, FormControl, FormArray } from '@angular/forms';
 import { MatDialogRef , MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
@@ -14,7 +14,7 @@ import { genreList } from '../genresList';
   styleUrls: ['./book-rent.component.scss']
 })
 export class BookRentComponent implements OnInit {
-
+  rentForm !: FormGroup;
   actionBtn : string = "Borrow"
   formGenres = new FormControl();
   genresList = genreList;
@@ -23,10 +23,16 @@ export class BookRentComponent implements OnInit {
   dataSource!: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-
   
+  @Input() bookId!: number;
+
+
   constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private formBuilder : FormBuilder,
     private api : ApiService,
+    private dialogRef : MatDialogRef<BookRentComponent>
+    
   ) { }
 
   ngOnInit(): void {
@@ -47,6 +53,20 @@ export class BookRentComponent implements OnInit {
       }
     })
   }
+
+  bookRent(bookId:number,userId:number){    
+     this.api.rentBook(bookId,userId).subscribe({
+      next:(res)=>{
+        alert("Book rented successfully")
+        this.dialogRef.close();
+      },
+      error:()=>{
+        alert("Error while renting the book")
+      }
+
+     })
+  } 
+
 
 
   applyFilter(event: Event) {
