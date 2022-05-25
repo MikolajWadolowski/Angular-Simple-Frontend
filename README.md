@@ -1,1 +1,1 @@
-Prosty Frontend to Aplikacji Webowej
+Prosty Frontend to Aplikacji Księgarni Webowej
