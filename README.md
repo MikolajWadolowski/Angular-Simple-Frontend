@@ -1,1 +1,1 @@
-Prosty Frontend to Aplikacji Księgarni Webowej
+Frontend for simple Online Library
